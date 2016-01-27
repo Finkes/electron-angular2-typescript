@@ -17,18 +17,34 @@ module.exports = function (grunt) {
   // These plugins provide necessary tasks
   grunt.loadNpmTasks('grunt-mocha-test');
   
-  grunt.registerTask('typescript', 'compile app and tests', function() {
+  grunt.registerTask('typescript-server', 'compile app and tests', function() {
     var done = this.async();
     
     grunt.util.spawn({
       grunt: false,
       cmd: "tsc",
-      args: ["-p", ".", "-sourcemap"],
+      args: ["-p", "./src/server", "-sourcemap"],
       opts: {
         stdio: "inherit"
       }
     }, function(err, result, stderr) {
-      grunt.log.ok('successfully transpiled typescript!');
+      grunt.log.ok('successfully transpiled typescript (server)!');
+      done();
+    });
+  });
+  
+  grunt.registerTask('typescript-client', 'compile app and tests', function() {
+    var done = this.async();
+    
+    grunt.util.spawn({
+      grunt: false,
+      cmd: "tsc",
+      args: ["-p", "./src/client", "-sourcemap"],
+      opts: {
+        stdio: "inherit"
+      }
+    }, function(err, result, stderr) {
+      grunt.log.ok('successfully transpiled typescript (client)!');
       done();
     });
   });
@@ -38,5 +54,5 @@ module.exports = function (grunt) {
   
   // Default task
   grunt.registerTask('default', ['test']);
-    grunt.registerTask('build', ['typescript']);
+  grunt.registerTask('build', ['typescript-server', 'typescript-client']);
 };
