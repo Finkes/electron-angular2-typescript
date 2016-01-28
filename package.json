@@ -5,7 +5,7 @@
   "main": "./bin/server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node bin/app/app.js"
+    "start": "./node_modules/.bin/electron ./app/server"
   },
   "engines": {
     "node": ">=5.1.1"
