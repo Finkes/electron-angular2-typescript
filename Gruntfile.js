@@ -11,11 +11,24 @@ module.exports = function (grunt) {
         },
         src: ['bin/test/**/*.js']
       }
+    },
+    copy: {
+      client: {
+        files: [
+          {
+            expand: true,
+            flatten: true,
+            src: './src/client/static/*',
+            dest: './app/'
+          }
+        ]
+      }
     }
   });
   
   // These plugins provide necessary tasks
   grunt.loadNpmTasks('grunt-mocha-test');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   
   grunt.registerTask('typescript-server', 'compile app and tests', function() {
     var done = this.async();
@@ -54,5 +67,5 @@ module.exports = function (grunt) {
   
   // Default task
   grunt.registerTask('default', ['test']);
-  grunt.registerTask('build', ['typescript-server', 'typescript-client']);
+  grunt.registerTask('build', ['copy:client', 'typescript-server', 'typescript-client']);
 };
