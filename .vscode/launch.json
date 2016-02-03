@@ -6,7 +6,7 @@
 			"name": "Launch",
 			"type": "node",
 			"request": "launch",
-			"program": "app/server/index.js",
+			"program": "./src/server/index.ts",
 			"stopOnEntry": false,
 			"args": [],
 			"cwd": ".",
@@ -19,7 +19,7 @@
 			},
 			"externalConsole": false,
 			"sourceMaps": true,
-			"outDir": "bin"
+			"outDir": "app"
 		},
 		{
 			"name": "Attach",
