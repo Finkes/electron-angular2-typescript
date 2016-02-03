@@ -1,10 +1,11 @@
-/// <reference path="./typings/tsd.d.ts" />
+/// <reference path="../../typings/tsd.d.ts" />
 
 'use strict';
 
 import * as electron from "electron";
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
+const ipcMain = electron.ipcMain;
 
 var mainWindow: Electron.BrowserWindow = null;
 
@@ -20,5 +21,9 @@ app.on("ready", () => {
 
   	// Open the DevTools.
   	mainWindow.webContents.openDevTools();
+	  
+	  ipcMain.on('channel', (event, arg) => {
+		  event.returnValue = 'pong';
+	  });
 });
 
